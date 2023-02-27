@@ -147,9 +147,8 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
     label->SetFont(fontBig);
 
     m_sizerText->Add(label, wxSizerFlags().Centre().Border());
-    m_sizerText->AddSpacer(5);
+    m_sizerText->AddSpacer(wxSizerFlags::GetDefaultBorder());
 
-    AddText(info.GetCopyrightToDisplay());
     AddText(info.GetDescription());
 
     if ( info.HasWebSite() )
@@ -186,20 +185,38 @@ bool wxGenericAboutDialog::Create(const wxAboutDialogInfo& info, wxWindow* paren
 
     DoAddCustomControls();
 
+    // Separate the copyright from all the rest and use smaller font for it as
+    // is custom.
+    const wxString& copyrightText = info.GetCopyrightToDisplay();
+    if ( !copyrightText.empty() )
+    {
+        m_sizerText->AddSpacer(wxSizerFlags::GetDefaultBorder());
+
+        wxFont fontSmall(*wxNORMAL_FONT);
+        fontSmall.SetFractionalPointSize(fontSmall.GetFractionalPointSize() - 1.0);
+        AddText(copyrightText)->SetFont(fontSmall);
+    }
+
 
     wxSizer *sizerIconAndText = new wxBoxSizer(wxHORIZONTAL);
+
+    wxSizerFlags flagsText = wxSizerFlags(1).Expand();
 #if wxUSE_STATBMP
     wxIcon icon = info.GetIcon();
     if ( icon.IsOk() )
     {
         sizerIconAndText->Add(new wxStaticBitmap(this, wxID_ANY, icon),
                                 wxSizerFlags().Border(wxRIGHT));
+
+        // Add a border to the right of the text to make the layout slightly
+        // more symmetrical.
+        flagsText.DoubleBorder(wxRIGHT);
     }
 #endif // wxUSE_STATBMP
-    sizerIconAndText->Add(m_sizerText, wxSizerFlags(1).Expand());
+    sizerIconAndText->Add(m_sizerText, flagsText);
 
     wxSizer *sizerTop = new wxBoxSizer(wxVERTICAL);
-    sizerTop->Add(sizerIconAndText, wxSizerFlags(1).Expand().Border());
+    sizerTop->Add(sizerIconAndText, wxSizerFlags(1).Expand().DoubleBorder());
 
 // Mac typically doesn't use OK buttons just for dismissing dialogs.
 #if !defined(__WXMAC__)
@@ -235,10 +252,17 @@ void wxGenericAboutDialog::AddControl(wxWindow *win)
     AddControl(win, wxSizerFlags().Border(wxDOWN).Centre());
 }
 
-void wxGenericAboutDialog::AddText(const wxString& text)
+wxStaticText* wxGenericAboutDialog::AddText(const wxString& text)
 {
-    if ( !text.empty() )
-        AddControl(new wxStaticText(this, wxID_ANY, text));
+    if ( text.empty() )
+        return nullptr;
+
+    auto *win = new wxStaticText(this, wxID_ANY, text,
+                                wxDefaultPosition, wxDefaultSize,
+                                wxALIGN_CENTRE);
+    AddControl(win);
+
+    return win;
 }
 
 #if wxUSE_COLLPANE

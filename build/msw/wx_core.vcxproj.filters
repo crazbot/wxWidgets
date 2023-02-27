@@ -753,6 +753,9 @@
     <ClCompile Include="..\..\src\msw\customdraw.cpp">
       <Filter>MSW Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\msw\darkmode.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\msw\data.cpp">
       <Filter>MSW Sources</Filter>
     </ClCompile>
@@ -937,6 +940,9 @@
       <Filter>MSW Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\msw\ole\uuid.cpp">
+      <Filter>MSW Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\msw\overlay.cpp">
       <Filter>MSW Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\msw\ownerdrw.cpp">
@@ -1202,6 +1208,9 @@
       <Filter>Common Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\wx\commandlinkbutton.h">
+      <Filter>Common Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\wx\compositebookctrl.h">
       <Filter>Common Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\wx\compositewin.h">

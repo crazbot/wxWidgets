@@ -442,7 +442,6 @@ set(BASE_CMN_SRC
     src/common/list.cpp
     src/common/log.cpp
     src/common/longlong.cpp
-    src/common/memory.cpp
     src/common/mimecmn.cpp
     src/common/module.cpp
     src/common/mstream.cpp
@@ -1219,6 +1218,7 @@ set(GUI_CMN_HDR
     wx/generic/animate.h
     wx/bmpbndl.h
     wx/filedlgcustomize.h
+    wx/compositebookctrl.h
 )
 
 set(UNIX_SRC
@@ -1640,6 +1640,7 @@ set(MSW_LOWLEVEL_SRC
     src/msw/evtloop.cpp
     src/msw/ole/access.cpp
     src/msw/bmpbndl.cpp
+    src/msw/overlay.cpp
 )
 
 set(MSW_LOWLEVEL_HDR
@@ -1736,6 +1737,7 @@ set(MSW_SRC
     src/msw/datetimectrl.cpp
     src/msw/hyperlink.cpp
     src/generic/activityindicator.cpp
+    src/msw/darkmode.cpp
 )
 
 set(MSW_HDR
