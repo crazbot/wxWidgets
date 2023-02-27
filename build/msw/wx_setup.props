@@ -12,7 +12,7 @@
     <wxCfg>
     </wxCfg>
     <wxVendor>custom</wxVendor>
-    <wxRuntimeLibs>dynamic</wxRuntimeLibs>
+    <wxRuntimeLibs>static</wxRuntimeLibs>
     <wxReleaseRuntimeLibrary>MultiThreadedDLL</wxReleaseRuntimeLibrary>
     <wxDebugRuntimeLibrary>MultiThreadedDebugDLL</wxDebugRuntimeLibrary>
   </PropertyGroup>
